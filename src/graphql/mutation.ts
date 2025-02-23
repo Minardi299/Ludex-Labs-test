@@ -1,6 +1,6 @@
 import { type MutationResolvers as IMutation } from "./generated/graphql";
 import { Context } from "./context";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 import { GraphQLError } from "graphql";
 
 const prisma = new PrismaClient();
@@ -59,5 +59,39 @@ export const Mutation: IMutation<Context> = {
       title: updatedTodo.title,
       completed: updatedTodo.completed,
     };
+  },
+  
+  deleteTodo: async (_:any, { id }: { id: string }, { prisma }) =>{
+    try {
+      const todo = await prisma.todo.findUnique({
+        where: { id },
+      });
+  
+      if (!todo) {
+        throw new GraphQLError("Todo not found", {
+          extensions: {
+            code: "NOT_FOUND",
+            http: { status: 404 },
+          },
+        });
+      }
+      await prisma.todo.delete({
+        where: { id },
+      });
+  
+      return "successful"; 
+    } catch (error) {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        console.error("Prisma error deleting todo:", error);
+        throw new GraphQLError("Database error", {
+          extensions: {
+            code: "DATABASE_ERROR",
+            http: { status: 500 },
+          },
+        });
+      }
+      console.error("Error deleting todo:", error);
+      throw error;
+    }
   },
 };
