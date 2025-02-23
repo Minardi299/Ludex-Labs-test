@@ -32,6 +32,7 @@ export type MutationCreateSomethingArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getAllTodos?: Maybe<Array<Maybe<Todo>>>;
   hello?: Maybe<Scalars['String']['output']>;
 };
 
@@ -39,6 +40,13 @@ export type Something = {
   __typename?: 'Something';
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+};
+
+export type Todo = {
+  __typename?: 'Todo';
+  completed: Scalars['Boolean']['output'];
+  id: Scalars['ID']['output'];
+  title: Scalars['String']['output'];
 };
 
 
@@ -119,6 +127,7 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   Something: ResolverTypeWrapper<Something>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  Todo: ResolverTypeWrapper<Todo>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -130,6 +139,7 @@ export type ResolversParentTypes = {
   Query: {};
   Something: Something;
   String: Scalars['String']['output'];
+  Todo: Todo;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
@@ -137,6 +147,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  getAllTodos?: Resolver<Maybe<Array<Maybe<ResolversTypes['Todo']>>>, ParentType, ContextType>;
   hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
 };
 
@@ -146,9 +157,17 @@ export type SomethingResolvers<ContextType = any, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type TodoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Todo'] = ResolversParentTypes['Todo']> = {
+  completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Something?: SomethingResolvers<ContextType>;
+  Todo?: TodoResolvers<ContextType>;
 };
 
