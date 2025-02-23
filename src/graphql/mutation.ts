@@ -1,4 +1,4 @@
-import { type MutationResolvers as IMutation } from "./generated/graphql";
+import { type MutationResolvers as IMutation, type UpdateTodoInput as TodoInput } from "./generated/graphql";
 import { Context } from "./context";
 import { PrismaClient, Prisma } from "@prisma/client";
 import { GraphQLError } from "graphql";
@@ -85,7 +85,7 @@ export const Mutation: IMutation<Context> = {
         console.error("Prisma error deleting todo:", error);
         throw new GraphQLError("Database error", {
           extensions: {
-            code: "DATABASE_ERROR",
+            code: "INTERNAL_SERVER_ERROR",
             http: { status: 500 },
           },
         });
@@ -93,5 +93,40 @@ export const Mutation: IMutation<Context> = {
       console.error("Error deleting todo:", error);
       throw error;
     }
+  },
+
+  updateTodo: async (_:any, {input}: {input: TodoInput}, { prisma } ) =>{
+    const { id, title, completed } = input;
+    const todo = await prisma.todo.findUnique({
+      where: { id },
+    });
+  
+    if (!todo) {
+      throw new GraphQLError("Todo not found", {
+        extensions: {
+          code: "NOT_FOUND",
+          http: { status: 404 },
+        },
+      });
+    }
+    const updateData: {
+      title?: { set: string }; 
+      completed?: boolean; 
+    } = {};
+    //if the title is not undefined and not null, then set it, otherwise use the current  one
+    if (title !== undefined && title !== null) {
+      updateData.title = { set: title }; 
+    }
+
+    if (completed !== undefined  && completed !== null) {
+      updateData.completed = completed; 
+    }
+    const updatedTodo = await prisma.todo.update({
+      where: { id },
+      data: updateData,
+    });
+
+  
+    return updatedTodo;
   },
 };
