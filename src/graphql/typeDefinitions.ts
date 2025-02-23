@@ -11,12 +11,15 @@ export const typeDefs = /* GraphQL */ `
   type Mutation {
     createSomething(input: CreateSomethingInput!): Something!
     createTodo(title: String!): Todo!
-    toggleTodo(id: String!): Todo!
+    toggleTodo(id: ID!): Todo!
   }
 
   type Query {
     hello: String
     getAllTodos: [Todo]
+    getTodoById(id: ID!): Todo
+    getIncompleteTodos: [Todo!]!
+    getCompletedTodos: [Todo!]!
   }
   type Todo {
     id: ID!

@@ -39,7 +39,7 @@ export type MutationCreateTodoArgs = {
 
 
 export type MutationToggleTodoArgs = {
-  id: Scalars['String']['input'];
+  id: Scalars['ID']['input'];
 };
 
 export type Query = {
