@@ -1,9 +1,10 @@
 import { type MutationResolvers as IMutation, type UpdateTodoInput as TodoInput } from "./generated/graphql";
 import { Context } from "./context";
-import { PrismaClient, Prisma } from "@prisma/client";
+import {  Prisma } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
 import { GraphQLError } from "graphql";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 export const Mutation: IMutation<Context> = {
   createSomething: async (_, { input }, { prisma }) => {
@@ -19,7 +20,7 @@ export const Mutation: IMutation<Context> = {
     };
   },
 
-  createTodo: async (_: any, { title }: {title: string}, { prisma }) => {
+  createTodo: async (_, { title }: {title: string}, { prisma }) => {
     const todo = await prisma.todo.create({
       data: { 
         title: title,
@@ -33,7 +34,7 @@ export const Mutation: IMutation<Context> = {
       completed: todo.completed,
     };
   },
-  toggleTodo: async (_: any, { id }: {id: string}, { prisma }) => {
+  toggleTodo: async (_, { id }: {id: string}, { prisma }) => {
     const todo = await prisma.todo.findUnique({
       where: { id },
     });
@@ -61,7 +62,7 @@ export const Mutation: IMutation<Context> = {
     };
   },
   
-  deleteTodo: async (_:any, { id }: { id: string }, { prisma }) =>{
+  deleteTodo: async (_, { id }: { id: string }, { prisma }) =>{
     try {
       const todo = await prisma.todo.findUnique({
         where: { id },
@@ -95,7 +96,7 @@ export const Mutation: IMutation<Context> = {
     }
   },
 
-  updateTodo: async (_:any, {input}: {input: TodoInput}, { prisma } ) =>{
+  updateTodo: async (_, {input}: {input: TodoInput}, { prisma } ) =>{
     const { id, title, completed } = input;
     const todo = await prisma.todo.findUnique({
       where: { id },

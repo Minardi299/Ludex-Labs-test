@@ -10,7 +10,7 @@ export const Query: IQuery<Context> = {
   getAllTodos: async () => {
     return await prisma.todo.findMany();
   },
-  getTodoById: async (_: any, { id }: {id: string}, { prisma }) => {
+  getTodoById: async (_, { id }: {id: string}, { prisma }) => {
     const todo = await prisma.todo.findUnique({
       where: { id },
     });

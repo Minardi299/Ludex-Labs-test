@@ -5,7 +5,6 @@ import { environment } from "./environment";
 
 const app = express();
 const port = environment.PORT;
-
 app.use("/graphql", yogaPublicRouter);
 
 app.get("/", (req, res) => {
