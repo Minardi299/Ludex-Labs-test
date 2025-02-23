@@ -2,6 +2,7 @@
   "scripts": {
     "dev": "env-cmd ts-node src/index.ts",
     "dev:watch": "nodemon",
+    "tsc":"npx tsc --watch",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate",
