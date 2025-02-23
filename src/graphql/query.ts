@@ -23,7 +23,34 @@ export const Query: IQuery<Context> = {
         },
       });
     }
-
     return todo;
-  }
+  },
+  getIncompleteTodos: async () => {
+    const incompletes = await prisma.todo.findMany({
+      where: { completed: false },
+    });
+    if (!incompletes) {
+      throw new GraphQLError("There's no incompleted todo", {
+        extensions: {
+          code: "NOT_FOUND",
+          http: { status: 404 },
+        },
+      });
+    }
+    return incompletes;
+  },
+  getCompletedTodos: async () => {
+    const completes = await prisma.todo.findMany({
+      where: { completed: true },
+    });
+    if (!completes) {
+      throw new GraphQLError("There's no completed todo", {
+        extensions: {
+          code: "NOT_FOUND",
+          http: { status: 404 },
+        },
+      });
+    }
+    return completes;
+  },
 };
