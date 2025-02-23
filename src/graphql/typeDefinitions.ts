@@ -7,7 +7,11 @@ export const typeDefs = /* GraphQL */ `
     id: ID!
     name: String!
   }
-
+  input UpdateTodoInput {
+    id: ID!
+    title: String
+    completed: Boolean
+  }
   type Mutation {
     createSomething(input: CreateSomethingInput!): Something!
     createTodo(title: String!): Todo!
