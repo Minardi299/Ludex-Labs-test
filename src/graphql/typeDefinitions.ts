@@ -12,6 +12,9 @@ export const typeDefs = /* GraphQL */ `
     createSomething(input: CreateSomethingInput!): Something!
     createTodo(title: String!): Todo!
     toggleTodo(id: ID!): Todo!
+    updateTodo(input: UpdateTodoInput!): Todo!
+    toggleTodo(id: ID!): Todo!
+    deleteTodo(id: ID!): Boolean!
   }
 
   type Query {
