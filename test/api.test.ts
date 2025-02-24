@@ -46,38 +46,38 @@ describe("test2",  () =>{
     expect(response.body.hello).to.deep.equal('world');
   });
 });
-// describe("Query Resolvers", () => {
+describe("Query Resolvers", () => {
 
 
-//   before(() => {
-//     stubTodo.resolves(mockTodos);
-//   });
+  before(() => {
+    stubTodo.resolves(mockTodos);
+  });
 
-//   afterEach(() => {
-//     stubTodo.restore();
-//   });
+  afterEach(() => {
+    stubTodo.restore();
+  });
 
   
-//     it("should return all todos", async () => {
+    it("should return all todos", async () => {
 
-//       // @ts-expect-error the query resolver can be call but ts is being a dick about it
-//       const result = await Query.getAllTodos({}, {}, { prisma }); 
+      // @ts-expect-error the query resolver can be call but ts is being a dick about it
+      const result = await Query.getAllTodos({}, {}, { prisma }); 
 
-//       expect(result).to.deep.equal([
-//         {
-//           id: "1",
-//           title: "First Todo",
-//           completed: false,
-//           createdAt: "2023-10-01T12:00:00.000Z",
-//           updatedAt: "2023-10-01T12:00:00.000Z",
-//         },
-//         {
-//           id: "2",
-//           title: "Second Todo",
-//           completed: true,
-//           createdAt: "2023-10-02T12:00:00.000Z",
-//           updatedAt: "2023-10-02T12:00:00.000Z",
-//         },
-//       ]);
-//     });
-// });
+      expect(result).to.deep.equal([
+        {
+          id: "1",
+          title: "First Todo",
+          completed: false,
+          createdAt: "2023-10-01T12:00:00.000Z",
+          updatedAt: "2023-10-01T12:00:00.000Z",
+        },
+        {
+          id: "2",
+          title: "Second Todo",
+          completed: true,
+          createdAt: "2023-10-02T12:00:00.000Z",
+          updatedAt: "2023-10-02T12:00:00.000Z",
+        },
+      ]);
+    });
+});
