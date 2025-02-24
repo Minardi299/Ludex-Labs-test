@@ -1,5 +1,5 @@
-import { type MutationResolvers as IMutation, type UpdateTodoInput as TodoInput } from "./generated/graphql";
-import { Context } from "./context";
+import { type MutationResolvers as IMutation, type UpdateTodoInput as TodoInput } from "./generated/graphql.ts";
+import { Context } from "./context.js";
 import {  Prisma } from "@prisma/client";
 // import { PrismaClient } from "@prisma/client";
 import { GraphQLError } from "graphql";

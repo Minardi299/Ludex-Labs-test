@@ -1,7 +1,7 @@
 import express from "express";
-import { yogaPublicRouter } from "./graphql/schema";
-import { cleanStack } from "./utils";
-import { environment } from "./environment";
+import { yogaPublicRouter } from "./graphql/schema.ts";
+import { cleanStack } from "./utils.ts";
+import { environment } from "./environment.ts";
 
 const app = express();
 const port = environment.PORT;

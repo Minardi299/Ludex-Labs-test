@@ -1,10 +1,10 @@
 import "reflect-metadata";
 import { Router } from "express";
 import { createYoga, createSchema, useExtendContext } from "graphql-yoga";
-import { typeDefs } from "./typeDefinitions";
+import { typeDefs } from "./typeDefinitions.ts";
 import { PrismaClient } from "@prisma/client";
-import { Query } from "./query";
-import { Mutation } from "./mutation";
+import { Query } from "./query.ts";
+import { Mutation } from "./mutation.ts";
 
 const prisma = new PrismaClient();
 

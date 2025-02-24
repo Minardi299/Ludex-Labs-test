@@ -1,5 +1,5 @@
-import { type QueryResolvers as IQuery } from "./generated/graphql";
-import { Context } from "./context";
+import { type QueryResolvers as IQuery } from "./generated/graphql.ts";
+import { Context } from "./context.js";
 import { PrismaClient } from "@prisma/client";
 import { GraphQLError } from "graphql";
 
