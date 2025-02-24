@@ -21,6 +21,14 @@ export const Mutation: IMutation<Context> = {
   },
 
   createTodo: async (_, { title }: {title: string}, { prisma }) => {
+    if (!title || title.trim() === "") {
+      throw new GraphQLError("ID is required", {
+        extensions: {
+          code: "MISSING_TITLE",
+          http: { status: 400 },
+        },
+      });
+    }
     const todo = await prisma.todo.create({
       data: { 
         title: title,
@@ -35,6 +43,14 @@ export const Mutation: IMutation<Context> = {
     };
   },
   toggleTodo: async (_, { id }: {id: string}, { prisma }) => {
+    if (!id || id.trim() === "") {
+      throw new GraphQLError("ID is required", {
+        extensions: {
+          code: "MISSING_ID",
+          http: { status: 400 },
+        },
+      });
+    }
     const todo = await prisma.todo.findUnique({
       where: { id },
     });
@@ -63,6 +79,14 @@ export const Mutation: IMutation<Context> = {
   },
   
   deleteTodo: async (_, { id }: { id: string }, { prisma }) =>{
+    if (!id || id.trim() === "") {
+      throw new GraphQLError("ID is required", {
+        extensions: {
+          code: "MISSING_ID",
+          http: { status: 400 },
+        },
+      });
+    }
     try {
       const todo = await prisma.todo.findUnique({
         where: { id },
@@ -98,6 +122,14 @@ export const Mutation: IMutation<Context> = {
 
   updateTodo: async (_, {input}: {input: TodoInput}, { prisma } ) =>{
     const { id, title, completed } = input;
+    if (!id || id.trim() === "") {
+      throw new GraphQLError("ID is required", {
+        extensions: {
+          code: "MISSING_ID",
+          http: { status: 400 },
+        },
+      });
+    }
     const todo = await prisma.todo.findUnique({
       where: { id },
     });
@@ -126,8 +158,6 @@ export const Mutation: IMutation<Context> = {
       where: { id },
       data: updateData,
     });
-
-  
     return updatedTodo;
   },
 };
