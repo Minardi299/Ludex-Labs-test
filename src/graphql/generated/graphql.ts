@@ -64,6 +64,11 @@ export type Query = {
 };
 
 
+export type QueryGetAllTodosArgs = {
+  order?: InputMaybe<Scalars['String']['input']>;
+};
+
+
 export type QueryGetTodoByIdArgs = {
   id: Scalars['ID']['input'];
 };
@@ -193,7 +198,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getAllTodos?: Resolver<Maybe<Array<Maybe<ResolversTypes['Todo']>>>, ParentType, ContextType>;
+  getAllTodos?: Resolver<Maybe<Array<Maybe<ResolversTypes['Todo']>>>, ParentType, ContextType, Partial<QueryGetAllTodosArgs>>;
   getCompletedTodos?: Resolver<Array<ResolversTypes['Todo']>, ParentType, ContextType>;
   getIncompleteTodos?: Resolver<Array<ResolversTypes['Todo']>, ParentType, ContextType>;
   getTodoById?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType, RequireFields<QueryGetTodoByIdArgs, 'id'>>;
