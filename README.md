@@ -17,14 +17,15 @@
 - [x] Ensure that your code is properly formatted using ESLint and Prettier.
 - [ ] Implement pagination for retrieving todos.
 - [ ] Allow filtering by `completed` status and sorting by `createdAt`. 
+- [ ] Add a `dueDate` field to todos. Implement filtering for **overdue/upcoming** tasks and sort todos by time.
+- [ ] Write unit and integration tests using Mocha to ensure the API functions correctly.
+
 <br>
 The sorting with prisma combine with graphql was ver finicky, if i have a Sort of type enum in graphql, when i do orderBy in prisma query, it wouldn't accept it, i tried the same thing with a string 'desc' or 'asc' and still nothing, even after I convert said string to the SortOrder type of prima
 <br>
-- [ ] Add a `dueDate` field to todos. Implement filtering for **overdue/upcoming** tasks and sort todos by time.
 <br>
 The due date could not be add due to not having a sorting feature
 <br>
-- [ ] Write unit and integration tests using Mocha to ensure the API functions correctly.
 <br>
 Mocha does not play nice with typescript at all in my experience, mocha just wouldn't run .ts file unless I change the module from commonjs to NodeNext and doing that caused a whole lot of other problems that require refactoring. For the actual unit tests itself, I went with supertest and sinon since I'm already familiar with them but I couldn't get prisma to stub the same I could with Mongo, even the example they gave on yoga official document doesn't work. The unit test is where I lost the most time in but still have nothing to show for it. The result can be found in the test2 branch.
 
