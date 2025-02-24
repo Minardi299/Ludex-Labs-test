@@ -77,8 +77,10 @@ export type Something = {
 export type Todo = {
   __typename?: 'Todo';
   completed: Scalars['Boolean']['output'];
+  createdAt: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   title: Scalars['String']['output'];
+  updatedAt: Scalars['String']['output'];
 };
 
 export type UpdateTodoInput = {
@@ -206,8 +208,10 @@ export type SomethingResolvers<ContextType = any, ParentType extends ResolversPa
 
 export type TodoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Todo'] = ResolversParentTypes['Todo']> = {
   completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

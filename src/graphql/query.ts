@@ -8,7 +8,14 @@ const prisma = new PrismaClient();
 export const Query: IQuery<Context> = {
   hello: () => "world",
   getAllTodos: async () => {
-    return await prisma.todo.findMany();
+    const todos = await prisma.todo.findMany();
+    return todos.map(todo => ({
+      id: todo.id,
+      title: todo.title,
+      completed: todo.completed,
+      createdAt: todo.createdAt.toISOString(), 
+      updatedAt: todo.updatedAt.toISOString(),
+    }));
   },
   getTodoById: async (_, { id }: {id: string}, { prisma }) => {
     if (!id || id.trim() === "") {
@@ -31,18 +38,36 @@ export const Query: IQuery<Context> = {
         },
       });
     }
-    return todo;
+    return {
+      id: todo.id,
+      title: todo.title,
+      completed: todo.completed,
+      createdAt: todo.createdAt.toISOString(),
+      updatedAt: todo.updatedAt.toISOString(),
+    };;
   },
   getIncompleteTodos: async () => {
     const incompletes = await prisma.todo.findMany({
       where: { completed: false },
     });
-    return incompletes;
+    return incompletes.map(incompletes => ({
+      id: incompletes.id,
+      title: incompletes.title,
+      completed: incompletes.completed,
+      createdAt: incompletes.createdAt.toISOString(), 
+      updatedAt: incompletes.updatedAt.toISOString(),
+    }));
   },
   getCompletedTodos: async () => {
     const completes = await prisma.todo.findMany({
       where: { completed: true },
     });
-    return completes;
+    return completes.map(completes => ({
+      id: completes.id,
+      title: completes.title,
+      completed: completes.completed,
+      createdAt: completes.createdAt.toISOString(), 
+      updatedAt: completes.updatedAt.toISOString(),
+    }));
   },
 };

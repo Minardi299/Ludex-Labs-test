@@ -31,5 +31,7 @@ export const typeDefs = /* GraphQL */ `
     id: ID!
     title: String!
     completed: Boolean!
+    createdAt: String!
+    updatedAt: String!
   }
 `;
