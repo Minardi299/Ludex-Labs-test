@@ -7,15 +7,8 @@ const prisma = new PrismaClient();
 
 export const Query: IQuery<Context> = {
   hello: () => "world",
-  getAllTodos: async (_, {order}: {order?: string}, {prisma}) => {
-    if (!order || order.trim() ===""){
-      order = 'desc'
-    }
-    const todos = await prisma.todo.findMany({
-      orderBy:{
-        createdAt: order,
-      },
-    });
+  getAllTodos: async () => {
+    const todos = await prisma.todo.findMany();
     return todos.map(todo => ({
       id: todo.id,
       title: todo.title,

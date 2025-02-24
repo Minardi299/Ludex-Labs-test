@@ -22,7 +22,7 @@ export const typeDefs = /* GraphQL */ `
 
   type Query {
     hello: String
-    getAllTodos(order: String): [Todo]
+    getAllTodos: [Todo]
     getTodoById(id: ID!): Todo
     getIncompleteTodos: [Todo!]!
     getCompletedTodos: [Todo!]!

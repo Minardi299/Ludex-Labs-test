@@ -1,29 +1,30 @@
 # LUDEX INTERNSHIP TEST
 
-## Getting Started
-
-### Prerequisites
-
-Ensure you have the following installed:
-
-- [Node.js](https://nodejs.org)
-- [Docker](https://www.docker.com/get-started/)
-- [Git](https://git-scm.com/)
-- _(Recommended)_ [VS Code](https://code.visualstudio.com/)
-  - If you install VS Code, it is recommended to also install the following extensions:
-    - **ESLint** (for linting and code formatting)
-    - **GraphQL** (for syntax highlighting and validation)
-    - **Prisma** (for schema editing and database insights)
-
-### Setting Up Your Repository
-
-This project is provided as a **GitHub template**. To begin, follow these steps:
-
-1. Navigate to the template repository on GitHub.
-2. Click the **"Use this template"** button to create a new repository under your own GitHub account.
-3. Clone your newly created repository to your local machine.
-4. Ensure that your repository is **public**, or if you choose to keep it private, grant access to the GitHub user `mccjul`.
-5. Once you have completed the test, provide the link to your repository in your submission.
+## Overview
+- [x] Create todos
+- [x] Mark todos as complete or incomplete
+- [x] Update the title of a todo
+- [x] Retrieve all todos
+- [x] Retrieve all incomplete todos
+- [x] Retrieve all completed todos
+- [x] Retrieve a single todo by ID
+- [x] Delete todos
+- [x] Validate user inputs before processing mutations.
+- [x] Handle potential errors, such as trying to update a non-existent todo.
+- [x] The API should be implemented using GraphQL with appropriate queries and mutations.
+- [x] Your project should be fully typed, and TypeScript configurations should be properly set up.
+- [x] The database interactions should be handled using Prisma.
+- [x] Ensure that your code is properly formatted using ESLint and Prettier.
+- [ ] Implement pagination for retrieving todos.
+- [ ] Allow filtering by `completed` status and sorting by `createdAt`. 
+<br>
+The sorting with prisma combine with graphql was ver finicky, if i have a Sort of type enum in graphql, when i do orderBy in prisma query, it wouldn't accept it, i tried the same thing with a string 'desc' or 'asc' and still nothing, even after I convert said string to the SortOrder type of prima
+- [ ] Add a `dueDate` field to todos. Implement filtering for **overdue/upcoming** tasks and sort todos by time.
+<br>
+The due date could not be add due to not having a sorting feature
+- [ ] Write unit and integration tests using Mocha to ensure the API functions correctly.
+<br>
+Mocha does not play nice with typescript at all in my experience, mocha just wouldn't run .ts file unless I change the module from commonjs to NodeNext and doing that caused a whole lot of other problems that require refactoring. For the actual unit tests itself, I went with supertest and sinon since I'm already familiar with them but I couldn't get prisma to stub the same I could with Mongo, even the example they gave on yoga official document doesn't work. The unit test is where I lost the most time in but still have nothing to show for it. The result can be found in the test2 branch.
 
 ### Running the Project
 
