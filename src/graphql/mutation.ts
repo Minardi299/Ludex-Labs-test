@@ -40,6 +40,8 @@ export const Mutation: IMutation<Context> = {
       id: todo.id,
       title: todo.title,
       completed: todo.completed,
+      createdAt: todo.createdAt.toISOString(),
+      updatedAt: todo.updatedAt.toISOString(),
     };
   },
   toggleTodo: async (_, { id }: {id: string}, { prisma }) => {
@@ -75,6 +77,8 @@ export const Mutation: IMutation<Context> = {
       id: updatedTodo.id,
       title: updatedTodo.title,
       completed: updatedTodo.completed,
+      createdAt: updatedTodo.createdAt.toISOString(),
+      updatedAt: updatedTodo.updatedAt.toISOString(),
     };
   },
   
@@ -158,6 +162,12 @@ export const Mutation: IMutation<Context> = {
       where: { id },
       data: updateData,
     });
-    return updatedTodo;
+    return {
+      id: updatedTodo.id,
+      title: updatedTodo.title,
+      completed: updatedTodo.completed,
+      createdAt: updatedTodo.createdAt.toISOString(),
+      updatedAt: updatedTodo.updatedAt.toISOString(),
+    };
   },
 };
