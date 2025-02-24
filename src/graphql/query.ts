@@ -11,6 +11,14 @@ export const Query: IQuery<Context> = {
     return await prisma.todo.findMany();
   },
   getTodoById: async (_, { id }: {id: string}, { prisma }) => {
+    if (!id || id.trim() === "") {
+      throw new GraphQLError("ID is required", {
+        extensions: {
+          code: "MISSING_ID",
+          http: { status: 400 },
+        },
+      });
+    }
     const todo = await prisma.todo.findUnique({
       where: { id },
     });
